@@ -1,0 +1,26 @@
+input{
+    margin: 5px;
+    font-size: 15px
+}
+.addresses {
+    width: 569px;
+    padding-left: 23px;
+}
+.wrapper select {
+    width: 291px;
+    border-radius: 36px;
+    border: solid 2px;
+    height: 49px;
+    font-size: 15px;
+    padding-left: 23px;
+    margin-right: 5px;
+}
+.input_register{
+    padding-left: 23px;
+}
+#alertas div{
+    display: inline-block;
+}
+#b_buscador{
+    margin: 2px;
+}

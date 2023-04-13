@@ -1,0 +1,45 @@
+header {
+  margin-bottom: 51px;
+}
+.title_header {
+  font-family: "Stencil Std, fantasy";
+  font-size: 49px;
+  margin-left: 25px;
+  position: relative;
+  margin-left: 109px;
+  /* margin-top: 80px; */
+  padding-top: 33px;
+}
+
+nav ul {
+  padding: 0px;
+}
+
+nav li {
+  list-style-type: none;
+}
+
+.tv {
+  height: 107px;
+  /* display: inline-block; */
+  position: absolute;
+}
+
+nav li select {
+  float: right;
+  top: -43px;
+  position: relative;
+}
+
+nav select {
+  background-color: grey;
+  color: white;
+  border-color: grey;
+  padding: 5px;
+}
+.header_select {
+  width: 182px;
+  margin-top: -34px;
+  padding: 9px;
+  margin-right: 19px;
+}

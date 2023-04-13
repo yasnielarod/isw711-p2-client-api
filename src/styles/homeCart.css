@@ -1,0 +1,33 @@
+/* .cart{
+    display: block;
+    width: 600px;
+    height: 600px;
+}
+#img_category{
+    display: inline;
+    width: 220px;
+    height: 200px;
+} */
+
+.home-card {
+    display: grid;
+    grid-template-rows: 200px auto;
+    justify-items: center;
+    align-items: center;
+    border: 1px solid gray;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .home-card img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .home-card h3 {
+    margin: 0;
+  }
+  
+  .home-card p {
+    margin: 10px 0;
+  }

@@ -1,0 +1,35 @@
+table,
+th,
+td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 19px;
+}
+
+th {
+    background-color: lightgray;
+}
+
+.t_categories{
+    width: 50%;
+    margin-bottom: 34px;
+}
+
+h2 {
+    border-bottom: solid;
+    border-width: 1px;
+}
+
+.buttonCategory {
+    width: 78px;
+}
+
+.centrada {
+    display: flex;
+    justify-content: space-around;
+}
+
+#b_category {
+    margin-left: 642px;
+    width: 200px;
+}

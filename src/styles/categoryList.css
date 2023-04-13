@@ -1,0 +1,28 @@
+.conteiner-list ul {
+    display: flex; /* Hace que los elementos de la lista se distribuyan horizontalmente */
+    list-style: none; /* Quita los marcadores de lista */
+    padding: 0; /* Quita el relleno predeterminado de la lista */
+    margin: 0; /* Quita el margen predeterminado de la lista */
+  }
+  
+  .conteiner-list li {
+    margin-right: 10px; /* Agrega un margen derecho entre los elementos de la lista */
+  }
+  
+  .conteiner-list li:last-child {
+    margin-right: 0; /* Quita el margen derecho del último elemento de la lista */
+  }
+  
+  .conteiner-list button {
+    background-color: #fff;
+    border: 2px solid #ccc;
+    color: #673ab7;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .conteiner-list button:hover {
+    background-color: #673ab7;
+    color: #fff;
+  }
