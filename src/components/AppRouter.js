@@ -10,6 +10,14 @@ import Home from "./Home";
 import NewsSave from "./NewsSave";
 import CategoriesSave from "./CategoriesSave";
 import HomeCategory from "./HomeCategory";
+import ConfirmEmail from "./ConfirmEmail";
+import WaitingWin from "./WaitingWin";
+import VerifyCode from "./VerifyCode";
+import LoginPasswordless from "./LoginPasswordless";
+import Passwordles from "./Passwordles";
+import WaitingLogin from "./WaitingLogin";
+import ConfirmPass from "./ConfirmPass";
+import Loading from "./Loading ";
 const AppRouter = () => {
   return (
     <>
@@ -17,6 +25,13 @@ const AppRouter = () => {
         <Routes>
           <Route exact path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/waiting-email" element={<WaitingWin />} />
+          <Route path="/confirm-email" element={<ConfirmEmail />} />
+          <Route path="/login-email" element={<LoginPasswordless />} />
+          <Route path="/verify-code" element={<VerifyCode />} />
+          <Route path="/passwordles" element={<Passwordles />} />
+          <Route path="/waiting-pass" element={<WaitingLogin />} />
+          <Route path="/confirm-pass" element={<ConfirmPass />} />
           <Route path="/home" element={<Home />} />
           <Route path="/home-category" element={<HomeCategory />} />
           <Route path="/news-sources" element={<NewsSources />} />

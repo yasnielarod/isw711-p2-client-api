@@ -1,4 +1,7 @@
-input{
+.input{
+    width: 265px;
+    height: 49px;
+    border-radius: 36px;
     margin: 5px;
     font-size: 15px
 }
@@ -23,4 +26,19 @@ input{
 }
 #b_buscador{
     margin: 2px;
+}
+.button-r {
+    width: 250px;
+    height: 49px;
+    border-radius: 36px;
+    background-color: #673ab7;
+    color: white;
+    font-size: 16px;
+    border: none;
+    margin-top: 20px;
+}
+
+.button-r:hover {
+    color: #fff;
+    background-color: grey; 
 }
