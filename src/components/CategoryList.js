@@ -8,17 +8,34 @@ const CategoryList = () => {
   const tokenValue = JSON.parse(sessionStorage.getItem("loginToken"));
   const [categories, setCategories] = useState([]);
 
-  useEffect(() => {
-    const url = "http://localhost:4000/api/categories/";
-    axios
-      .get(url, { headers: { Authorization: `Bearer ${tokenValue}` } })
-      .then((res) => {
-        setCategories(res.data.data);
-      })
-      .catch((error) => {
+
+  
+  useEffect(()=> {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.post("http://localhost:5000/", {
+          query: `
+          query{
+            allCategories {
+               _id
+              name
+            }
+          }
+          `,
+        });
+
+        const categories = await response?.data?.data?.allCategories || [];
+        // console.log(response)
+        setCategories(categories);
+        // console.log(categories)
+   
+      } catch (error) {
         if (error.response.status >= 400) setCategories([]);
-      });
-  }, []);
+      }
+    }
+    fetchCategories();
+
+  },[])
 
   const handleBtn = (e) => {
     e.preventDefault();
@@ -31,7 +48,7 @@ const CategoryList = () => {
 
   return (
     <div className="conteiner-list">
-      <h3>Categories</h3>
+      <h3 className="h3">Categories</h3>
       <ul>
         {categories.map((category, index) => (
           <li key={index}>

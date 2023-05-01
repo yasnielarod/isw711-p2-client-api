@@ -17,30 +17,71 @@ const CategoriesEditing = () => {
 
   //Load data to edit
   useEffect(() => {
-    const url = `http://localhost:4000/api/categories/${categoryId}`;
-    const config = {
-      headers: { Authorization: `Bearer ${tokenValue}` },
-    };
-    axios
-      .get(url, config)
-      .then((res) => {
-        const dataSee = res.data.data;
-        setCategory(dataSee);
-      })
-      .catch((err) => {
-        if (err.response) {
-          console.log(err.response.status);
-          if (err.response.status === 401) {
-            navigate("/login");
-          } else {
-            console.log(err.response.data.message);
+
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.post("http://localhost:5000/", {
+          query: `
+          query{
+            getCategoryId(id: ${categoryId}) {
+              _id,
+              name
+            }
           }
-        } else if (err.request) {
-          console.log("Network error:", err.request);
-        } else {
-          console.log("Unexpected error:", err.message);
-        }
-      });
+          `,
+        });
+
+        const categories = response?.data?.data?.getCategoryId || [];
+        setCategory(categories);
+   
+      } catch (err) {
+        if (err.response) {
+          if (err.response) {
+            console.log(err.response.status);
+            if (err.response.status === 401) {
+              navigate("/login");
+            } else {
+              console.log(err.response.data.message);
+            }
+          } else if (err.request) {
+            console.log("Network error:", err.request);
+          } else {
+            console.log("Unexpected error:", err.message);
+          }
+      }
+    }
+  }
+  fetchCategories();
+
+
+
+
+
+
+    // const url = `http://localhost:4000/api/categories/${categoryId}`;
+    // const config = {
+    //   headers: { Authorization: `Bearer ${tokenValue}` },
+    // };
+    // axios
+    //   .get(url, config)
+    //   .then((res) => {
+    //     const dataSee = res.data.data;
+    //     setCategory(dataSee);
+    //   })
+    //   .catch((err) => {
+    //     if (err.response) {
+    //       console.log(err.response.status);
+    //       if (err.response.status === 401) {
+    //         navigate("/login");
+    //       } else {
+    //         console.log(err.response.data.message);
+    //       }
+    //     } else if (err.request) {
+    //       console.log("Network error:", err.request);
+    //     } else {
+    //       console.log("Unexpected error:", err.message);
+    //     }
+    //   });
   }, []);
 
   const handleInput = (e) => {
@@ -101,7 +142,6 @@ const CategoriesEditing = () => {
       <h2>Categories</h2>
       <div className="category-edit-c">
         <input
-          id= "i_category-edit"
           type="text"
           placeholder="Name"
           name="name"
@@ -111,10 +151,10 @@ const CategoriesEditing = () => {
         /><br/>
         {err.name && <div className="error">{err.name}</div>}
         {errorServer && <div className="error">{errorServer}</div>}
-        <button className="buttonCategoryEdit" onClick={handleEdit}>
+        <button className="b_newsources" onClick={handleEdit}>
           Edit
         </button>
-        <button className="buttonCategoryEdit" onClick={handleCancel}>
+        <button className="b_newsources" onClick={handleCancel}>
           Cancel
         </button>
       </div>

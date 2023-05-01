@@ -15,6 +15,10 @@ const HomeCategory = () => {
   const idUser = JSON.parse(sessionStorage.getItem("userConect"));
   const [news, setNews] = useState([]);
 
+
+  
+
+
   useEffect(()=> {
     console.log(idUser)
     const urlNews = `http://localhost:4000/api/news/${idUser}?category=${idCategoryHome}`;
