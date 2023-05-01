@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import "../styles/newsEditing.css";
 import "../styles/messajeError.css";
+import "../styles/newsSave.css";
 import Header from "./Header.js";
 import Footer from "./Footer.js";
 import { useNavigate } from "react-router-dom";
@@ -22,18 +22,72 @@ const NewsEditing = () => {
   const [errorServer, setErrorServer] = useState("");
 
   //Load categories
-  useEffect(() => {
-    const url = "http://localhost:4000/api/categories/";
-    axios
-      .get(url, { headers: { Authorization: `Bearer ${tokenValue}` } })
-      .then((res) => {
-        setCategories(res.data.data);
-      })
-      .catch((error) => {
+
+  useEffect(()=> {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.post("http://localhost:5000/", {
+          query: `
+          query{
+            allCategories {
+               _id
+              name
+            }
+          }
+          `,
+        });
+
+        const categories = await response?.data?.data?.allCategories || [];
+        console.log(response)
+        setCategories(categories);
+        console.log(categories)
+   
+      } catch (error) {
         if (error.response.status >= 400) setCategories([]);
-      });
-  }, []);
+      }
+    }
+    fetchCategories();
+
+  },[])
+
+  // useEffect(() => {
+  //   const url = "http://localhost:4000/api/categories/";
+  //   axios
+  //     .get(url, { headers: { Authorization: `Bearer ${tokenValue}` } })
+  //     .then((res) => {
+  //       setCategories(res.data.data);
+  //     })
+  //     .catch((error) => {
+  //       if (error.response.status >= 400) setCategories([]);
+  //     });
+  // }, []);
   //Get data to edit
+  // useEffect(()=> {
+  //   const fetchCategories = async () => {
+  //     try {
+  //       const response = await axios.post("http://localhost:5000/", {
+  //         query: `
+  //         query{
+  //           allCategories {
+  //              _id
+  //             name
+  //           }
+  //         }
+  //         `,
+  //       });
+
+  //       const categories = await response?.data?.data?.allCategories || [];
+  //       console.log(response)
+  //       setCategories(categories);
+  //       console.log(categories)
+   
+  //     } catch (error) {
+  //       if (error.response.status >= 400) setCategories([]);
+  //     }
+  //   }
+  //   fetchCategories();
+
+  // },[])
   useEffect(() => {
     const url = `http://localhost:4000/api/newsource/${userId}`;
     const config = {
@@ -128,7 +182,8 @@ const NewsEditing = () => {
     <div className="container">
       <Header key={Math.random() * 1000} />
       <h2>News source</h2>
-      <p>-----------------------------------</p>
+      {/* <p>-----------------------------------</p> */}
+      <div className="category-edit-c">
       <input
         type="text"
         placeholder="Name"
@@ -149,7 +204,7 @@ const NewsEditing = () => {
       />
       {err.url && <div className="error">{err.url}</div>}
       <br />
-      <select value={selectedOption} onClick={handleSelectChange}>
+      <select className="i_sources" value={selectedOption} onClick={handleSelectChange}>
         {categories.length ? (
           categories.map((ele) => (
             <option key={ele.id} data-id={ele._id} onClick={handleSelect}>
@@ -161,13 +216,14 @@ const NewsEditing = () => {
         )}
       </select>
       {errorServer && <div className="error">{errorServer}</div>}
-      <p>-----------------------------------</p>
+      {/* <p>-----------------------------------</p> */}
       <button id="b_buscador" onClick={handleBtn}>
         Edit
       </button>
       <button id="b_buscador" onClick={handleCancel}>
         Cancel
       </button>
+      </div>
       <Footer />
     </div>
   );

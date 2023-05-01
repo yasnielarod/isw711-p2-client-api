@@ -6,10 +6,12 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const NewsSources = () => {
+ 
   const navigate = useNavigate();
   const tokenValue = JSON.parse(sessionStorage.getItem("loginToken"));
   const [newsSource, setNewsSource] = useState([]);
   //-------
+
   useEffect(() => {
     const idUser = JSON.parse(sessionStorage.getItem("userConect"));
     console.log(idUser);
@@ -74,7 +76,6 @@ const NewsSources = () => {
     <div className="container">
       <Header key={Math.random()*1000} />
       <h2>News Sources</h2>
-      
       <table className="t_newsource">
         <thead>
           <tr>
@@ -90,7 +91,7 @@ const NewsSources = () => {
                 <td>{dato.name}</td>
                 <td>{dato.nameCategory}</td>
                 <td>
-                  <button  name="Edit" data-id={dato._id} onClick={handleEdit}>Edit</button> <button data-id={dato._id} onClick= {handleDelete}>Delete</button>
+                  <button className="edit" name="Edit" data-id={dato._id} onClick={handleEdit}>Edit</button> <button className="delete" data-id={dato._id} onClick= {handleDelete}>Delete</button>
                 </td>
               </tr>
             ))

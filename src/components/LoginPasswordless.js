@@ -16,11 +16,6 @@ const LoginPasswordless = () => {
         return () => clearTimeout(timer);
       }, []);
 
-
-
-
-
-
   return (
     <Loading msj={messaje} />
   )
