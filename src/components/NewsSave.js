@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Footer from "./Footer";
 import Header from "./Header";
 import "../styles/messajeError.css";
+import "../styles/newsSave.css";
 
 const newInicial = {
   url: "",
@@ -21,17 +22,32 @@ const NewsSave = () => {
   const [errorServer, setErrorServer] = useState("");
 
   //Load categories
-  useEffect(() => {
-    const url = "http://localhost:4000/api/categories/";
-    axios
-      .get(url, { headers: { Authorization: `Bearer ${tokenValue}` } })
-      .then((res) => {
-        setCategories(res.data.data);
-      })
-      .catch((error) => {
+  useEffect(()=> {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.post("http://localhost:5000/", {
+          query: `
+          query{
+            allCategories {
+               _id
+              name
+            }
+          }
+          `,
+        });
+
+        const categories = await response?.data?.data?.allCategories || [];
+        console.log(response)
+        setCategories(categories);
+        console.log(categories)
+   
+      } catch (error) {
         if (error.response.status >= 400) setCategories([]);
-      });
-  }, []);
+      }
+    }
+    fetchCategories();
+
+  },[])
 
   //-------
   const handleInput = (e) => {
@@ -153,10 +169,10 @@ const NewsSave = () => {
           )}
         </select>
         {errorServer && <div className="error">{errorServer}</div>}
-        <button className="b_newsources" onClick={handleBtn}>
+        <button  id="b_buscador"onClick={handleBtn}>
           Add
         </button>
-        <button className="b_newsources" onClick={handleCancel}>
+        <button  id="b_buscador" onClick={handleCancel}>
           Cancel
         </button>
       </div>
